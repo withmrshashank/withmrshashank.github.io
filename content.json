@@ -26,7 +26,7 @@
       "slug": "why-own-scheduler",
       "title": "Why I’m building our own scheduling tool",
       "date": "2026-11-16",
-      "draft": true,
+      "draft": false,
       "summary": "Buffer works well for us today. Here’s why AUR Ventures is building its own anyway.",
       "body": "Right now AUR Studio schedules posts with Buffer, and it does the job. So why build our own?\n\n## Subscriptions grow with you\n\nEvery new client means more accounts, more seats and a bigger monthly bill. For a young studio, that cost climbs faster than revenue. Owning the tool turns an ever-growing subscription into something we control.\n\n## Built around how we work\n\nOff-the-shelf tools are made for everyone. Ours can be shaped around the way the studio plans, approves and publishes content, without paying for features we never use.\n\n## Starting small\n\nThe first version focuses on three platforms:\n\n- Instagram\n- LinkedIn\n- X\n\nIt’s designed for mobile first, because that’s where most of my day-to-day social work happens.\n\n## What comes next\n\nWe’ll use it daily inside the studio, fix what’s missing, then apply for official platform API approval. If it works as well as I hope, we may open it up to other teams too. I’ll share progress here as it happens."
     },
