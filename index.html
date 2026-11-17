@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Shashank Mishra, founder of AUR Ventures and social media & community manager.">
+<title>Shashank Mishra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500..650&display=swap" rel="stylesheet">
+<style>
+/* Layout: founder homepage — split hero with a live "Now" panel; each section is its own hash page; grids fold to one column on phones */
+:root{
+  --bg:#F3F4F1; --surface:#FFFFFF; --sunk:#E8EAE5; --fg:#121519; --muted:#5B626A; --line:#D8DBD4;
+  --accent:#2E43D6; --accent-fg:#FFFFFF; --accent-soft:#E2E6FB; --ok:#1C7449; --ok-soft:#DDF0E5; --warn:#8F5A00; --warn-soft:#F6EAD2;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1013; --surface:#171A1F; --sunk:#1D2127; --fg:#ECEEF0; --muted:#9AA1AA; --line:#2A2F36;
+  --accent:#8E9CFF; --accent-fg:#0E1013; --accent-soft:#1F2442; --ok:#62D39C; --ok-soft:#163327; --warn:#E8B65C; --warn-soft:#3A2D14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1013; --surface:#171A1F; --sunk:#1D2127; --fg:#ECEEF0; --muted:#9AA1AA; --line:#2A2F36;
+  --accent:#8E9CFF; --accent-fg:#0E1013; --accent-soft:#1F2442; --ok:#62D39C; --ok-soft:#163327; --warn:#E8B65C; --warn-soft:#3A2D14; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:72rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:700px){.wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+.label{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal;font-size:.85rem;font-weight:800}
+.links{display:flex;gap:.15rem;list-style:none;margin:0;padding:0}
+.links a{display:block;text-decoration:none;padding:.45rem .8rem;border-radius:8px;color:var(--muted);font-size:.95rem;transition:background .15s,color .15s}
+.links a:hover{background:var(--sunk);color:var(--fg)}
+.links a[aria-current="page"]{color:var(--fg);background:var(--sunk);font-weight:500}
+.menu-btn{display:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:.45rem .85rem;cursor:pointer;font-size:.92rem}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  .links{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem max(16px,env(safe-area-inset-right,0px)) 1rem max(16px,env(safe-area-inset-left,0px))}
+  .links.open{display:flex}
+  .links a{padding:.8rem .6rem;font-size:1.05rem}
+}
+
+/* Shared */
+main{min-height:70vh}
+.view{animation:rise .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.2rem;border-radius:10px;border:1px solid var(--line);background:var(--surface);text-decoration:none;font-weight:500;font-size:.98rem;cursor:pointer;transition:transform .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px);border-color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.page-head{padding-block:4rem 2.5rem;display:grid;gap:1rem;max-width:48rem}
+.page-head h1{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1;letter-spacing:-.03em;margin:0}
+.page-head p{font-size:1.18rem;color:var(--muted);margin:0;max-width:40rem}
+.back{text-decoration:none;color:var(--muted);font-size:.95rem;width:fit-content}
+.back:hover{color:var(--accent)}
+section.band{padding-block:3.5rem;border-top:1px solid var(--line)}
+.band-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.band-head h2{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,3.6vw,2.5rem);letter-spacing:-.02em;line-height:1.05;margin:0}
+.band-head a{color:var(--accent);text-decoration:none;font-weight:500}
+.pill{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;padding:.25rem .6rem;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.blue{background:var(--accent-soft);color:var(--accent)}
+.grid{display:grid;gap:1rem}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;gap:.7rem;text-decoration:none;min-width:0}
+a.card{transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--fg);transform:translateY(-2px)}
+.card h3{font-family:var(--display);font-weight:650;font-size:1.35rem;line-height:1.15;letter-spacing:-.01em;margin:0}
+.card p{margin:0;color:var(--muted);font-size:.98rem}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:.75rem}
+.card .go{margin-top:auto;padding-top:.4rem;color:var(--accent);font-weight:500;font-size:.95rem}
+.next{display:flex;justify-content:flex-end;padding-block:2.5rem 4.5rem}
+.next a{text-decoration:none;text-align:right;display:grid}
+.next a span{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.02em}
+.next a:hover span{color:var(--accent)}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:3rem;align-items:center;padding-block:4.5rem 3.5rem}
+.hero .who{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.hero h1{font-family:var(--display);font-weight:750;font-size:clamp(2.7rem,7.2vw,5.4rem);line-height:.98;letter-spacing:-.035em;margin:0}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:1.2rem;color:var(--muted);max-width:34rem;margin:1.5rem 0 2rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.now{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem;display:grid;gap:1rem;box-shadow:0 30px 60px -40px rgba(18,21,25,.45)}
+.now-head{display:flex;justify-content:space-between;align-items:center}
+.now ul{list-style:none;margin:0;padding:0;display:grid}
+.now li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;padding:.85rem 0;border-top:1px solid var(--line);align-items:start}
+.now li:first-child{border-top:none;padding-top:0}
+.now .dot{width:10px;height:10px;border-radius:50%;margin-top:.45rem;background:var(--accent)}
+.now .dot.ok{background:var(--ok)}
+.now .dot.warn{background:var(--warn)}
+.now strong{display:block;font-weight:600}
+.now small{color:var(--muted);font-size:.9rem}
+.live .dot.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 50%,transparent)}50%{box-shadow:0 0 0 6px transparent}}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:3rem;gap:2.25rem}}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:3.5rem}
+.facts div{padding:1.2rem 1.3rem;border-left:1px solid var(--line)}
+.facts div:first-child{border-left:none}
+.facts b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.facts span{color:var(--muted);font-size:.9rem}
+@media (max-width:700px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:none}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:3rem;padding-bottom:1rem}
+.photo{aspect-ratio:4/5;max-width:100%;border-radius:18px;background:linear-gradient(160deg,var(--sunk),var(--accent-soft));border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:.92rem;text-align:center;padding:1rem;position:sticky;top:96px}
+.prose{max-width:42rem;min-width:0}
+.prose p{margin:0 0 1.15rem}
+.prose p.big{font-family:var(--display);font-weight:500;font-size:clamp(1.35rem,2.5vw,1.75rem);line-height:1.35;letter-spacing:-.01em}
+.prose h2{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:-.015em;margin:2.5rem 0 1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chips span{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:.35rem .7rem;font-size:.92rem}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:1.5rem;padding:1.25rem 0;border-top:1px solid var(--line)}
+.tl .when{font-family:var(--mono);font-size:.85rem;color:var(--muted);padding-top:.2rem}
+.tl h3{margin:0;font-size:1.08rem;font-weight:600}
+.tl .org{color:var(--accent);font-weight:500;margin:.1rem 0 .4rem}
+.tl p{margin:0;color:var(--muted);font-size:.98rem}
+@media (max-width:760px){.about{grid-template-columns:1fr}.photo{position:static;max-width:15rem}.tl li{grid-template-columns:1fr;gap:.3rem}}
+
+/* Ventures */
+.parent{background:var(--fg);color:var(--bg);border-radius:20px;padding:2rem;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2rem;margin-bottom:1rem}
+.parent h2{font-family:var(--display);font-weight:750;font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.03em;line-height:1;margin:.6rem 0 1rem}
+.parent p{margin:0;opacity:.8;max-width:34rem}
+.parent .label{color:inherit;opacity:.65}
+.parent dl{margin:0;display:grid;gap:.9rem;align-content:end}
+.parent dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6}
+.parent dd{margin:.15rem 0 0;font-weight:500}
+@media (max-width:760px){.parent{grid-template-columns:1fr;padding:1.5rem}}
+.venture{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.6rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:2rem;margin-bottom:1rem}
+.venture h3{font-family:var(--display);font-weight:700;font-size:1.8rem;letter-spacing:-.02em;margin:.7rem 0 .4rem;line-height:1.05}
+.venture .tag{color:var(--muted);margin:0}
+.venture ul{margin:0;padding:0;list-style:none;display:grid;gap:.1rem}
+.venture li{padding:.6rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);}
+.venture li b{font-weight:600}
+.venture li span{color:var(--muted);font-size:.95rem}
+.venture .meta{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;font-size:.92rem;color:var(--muted)}
+.venture .meta code{font-family:var(--mono);color:var(--fg);font-size:.88rem}
+@media (max-width:760px){.venture{grid-template-columns:1fr;gap:1rem}}
+
+/* Work + CareWell */
+.wcard .vis{aspect-ratio:16/9;max-width:100%;border-radius:10px;display:flex;align-items:flex-end;padding:1rem;font-family:var(--display);font-weight:700;font-size:1.45rem;line-height:1.05;letter-spacing:-.01em;color:#fff}
+.v-care{background:linear-gradient(140deg,#E2725B,#14504F 60%,#0E3B3D)}
+.v-aur{background:linear-gradient(140deg,#4C5FE8,#1A2380)}
+.v-bit{background:linear-gradient(140deg,#7A6BB0,#2E2650)}
+.meta-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:3rem}
+.meta-row div{padding:1rem 1.2rem;border-left:1px solid var(--line);min-width:0}
+.meta-row div:first-child{border-left:none}
+.meta-row dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.meta-row dd{margin:.25rem 0 0;font-weight:500;font-size:.95rem}
+@media (max-width:760px){.meta-row{grid-template-columns:1fr 1fr}.meta-row div:nth-child(3){border-left:none}.meta-row div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.block{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:2rem;padding-block:2.5rem;border-top:1px solid var(--line)}
+.block > h2{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:-.015em;margin:0;line-height:1.1}
+@media (max-width:820px){.block{grid-template-columns:1fr;gap:1rem}}
+.why{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:1.25rem;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.why:first-child{padding-top:0}
+.why h3{margin:0;font-size:1rem;font-weight:600}
+.why p{margin:0;color:var(--muted)}
+@media (max-width:640px){.why{grid-template-columns:1fr;gap:.3rem}}
+.nums{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;margin:0}
+.nums dt{font-family:var(--display);font-weight:700;font-size:2.4rem;letter-spacing:-.02em;line-height:1}
+.nums dd{margin:.3rem 0 0;color:var(--muted);font-size:.9rem;max-width:12rem}
+
+.deck{border:1px solid var(--line);border-radius:16px;background:var(--sunk);padding:.9rem}
+.deck-bar{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;padding-bottom:.8rem}
+.deck-bar .t{font-weight:600;font-size:.95rem;min-width:0}
+.deck-bar .t span{color:var(--muted);font-weight:400}
+.ctrl{display:flex;align-items:center;gap:.4rem}
+.ib{min-width:2.4rem;height:2.4rem;border-radius:9px;border:1px solid var(--line);background:var(--surface);cursor:pointer;padding:0 .7rem;font-size:.95rem}
+.ib:hover{border-color:var(--fg)}
+.ib:disabled{opacity:.4;cursor:default}
+.count{font-family:var(--mono);font-size:.85rem;color:var(--muted);min-width:4rem;text-align:center}
+.stage{container:deck/inline-size;width:100%;margin:0 auto}
+.prog{height:3px;border-radius:3px;background:var(--line);margin-top:.8rem;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.deck.full{position:fixed;inset:0;z-index:60;border-radius:0;border:none;background:#0B1413;display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 1rem) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 1rem) max(16px,env(safe-area-inset-left,0px))}
+.deck.full .deck-bar,.deck.full .count{color:#E6EBE7}
+.deck.full .ib{background:#14504F;border-color:#2B5B5A;color:#E6EBE7}
+.deck.full .stage{width:min(100%,calc((100vh - 9rem)*16/9))}
+.hint{font-size:.88rem;color:var(--muted);margin:.8rem 0 0}
+
+/* CareWell slide identity (deliberately fixed colours: this is the client deck's own look) */
+.slide{background:#F4F8F6;color:#17302F;border-radius:10px;overflow:hidden;position:relative;padding:1.4rem 1.2rem 2.6rem;display:flex;flex-direction:column;gap:.9rem;min-height:18rem;font-family:var(--body)}
+.slide.dark{background:#0E3B3D;color:#F4F8F6}
+.slide h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.5rem;line-height:1.1;margin:0}
+.slide .sub{margin:-.35rem 0 0;color:#5B7170;font-size:.98rem}
+.slide.dark .sub,.slide.dark .note{color:#A9C7C0}
+.slide .foot{position:absolute;left:1.2rem;right:1.2rem;bottom:.85rem;font-size:.72rem;color:#5B7170;display:flex;justify-content:space-between}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.65rem}
+.sc{background:#FCFEFD;border:1px solid #D3E3DD;border-radius:10px;padding:.75rem .85rem;color:#17302F}
+.sc .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#C85A43;margin:0 0 .2rem}
+.sc h3{font-family:"Fraunces",Georgia,serif;font-size:1.02rem;font-weight:600;margin:0 0 .2rem;line-height:1.2}
+.sc p{margin:0;font-size:.84rem;color:#5B7170;line-height:1.4}
+.sl{list-style:none;margin:0;padding:0;display:grid}
+.sl li{display:grid;grid-template-columns:2rem 1fr;gap:.6rem;padding:.5rem 0;border-bottom:1px solid #D3E3DD}
+.sl b{font-family:"Fraunces",Georgia,serif;color:#C85A43}
+.sl small{display:block;color:#5B7170;font-size:.82rem}
+.sq{font-family:"Fraunces",Georgia,serif;font-size:1.4rem;line-height:1.25;margin:0;border-left:3px solid #E2725B;padding-left:1rem}
+.sch{display:flex;flex-wrap:wrap;gap:.4rem}
+.sch span{font-size:.78rem;padding:.3rem .7rem;border-radius:999px;background:#D5EAE3;color:#14504F;font-weight:600}
+.slide.dark .sch span{background:#14504F;color:#D5EAE3}
+.note{font-size:.86rem;color:#5B7170;margin:0}
+.stw{overflow-x:auto;border:1px solid #D3E3DD;border-radius:8px}
+.st{border-collapse:collapse;width:100%;min-width:34rem;font-size:.78rem;background:#FCFEFD;color:#17302F}
+.st th{background:#0E3B3D;color:#F4F8F6;text-align:left;font-size:.66rem;letter-spacing:.07em;padding:.45rem .55rem}
+.st td{padding:.36rem .55rem;border-top:1px solid #D3E3DD}
+.st tr:nth-child(even) td{background:#EEF5F2}
+.st td:first-child{font-family:"Fraunces",Georgia,serif;color:#C85A43;font-weight:600}
+.sf{display:flex;flex-wrap:wrap;gap:.5rem}
+.sf div{flex:1 1 7rem;background:#FCFEFD;border:1px solid #D3E3DD;border-radius:10px;padding:.7rem .8rem;color:#17302F}
+.sf b{font-family:"Fraunces",Georgia,serif;color:#C85A43;font-size:1.15rem;display:block}
+.sf strong{display:block;font-size:.93rem}
+.sf small{color:#5B7170;font-size:.8rem}
+.cover{justify-content:center;gap:1rem}
+.cover svg{width:3rem;height:3rem}
+.cover h2{font-size:2rem}
+.cover .big{font-family:"Fraunces",Georgia,serif;font-size:1.2rem;color:#D5EAE3;margin:0}
+.sk{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.6rem}
+.sk li{background:#FCFEFD;border:1px solid #D3E3DD;border-radius:10px;padding:.8rem .9rem;font-size:.95rem}
+.sk li::before{content:"✓ ";color:#C85A43;font-weight:700}
+@container deck (min-width:700px){
+  .slide{aspect-ratio:16/9;min-height:0;padding:5cqw 6cqw 7cqw;gap:2.1cqw}
+  .slide h2{font-size:3.3cqw}.slide .sub{font-size:1.6cqw;margin-top:-1cqw}
+  .slide .foot{left:6cqw;right:6cqw;bottom:2.5cqw;font-size:1.05cqw}
+  .sg{gap:1.3cqw;grid-template-columns:repeat(var(--c,3),1fr)}
+  .sc{padding:1.5cqw 1.7cqw;border-radius:1.1cqw}.sc .k{font-size:1cqw}.sc h3{font-size:1.8cqw}.sc p{font-size:1.28cqw}
+  .sl li{grid-template-columns:4cqw 1fr;padding:1cqw 0;font-size:1.65cqw}.sl b{font-size:2cqw}.sl small{display:inline;margin-left:1cqw;font-size:1.28cqw}
+  .sq{font-size:2.9cqw;padding-left:2cqw}.sch span{font-size:1.28cqw;padding:.6cqw 1.3cqw}.note{font-size:1.38cqw}
+  .stw{overflow:visible}.st{min-width:0;font-size:1.2cqw}.st th{font-size:1cqw;padding:.72cqw 1cqw}.st td{padding:.58cqw 1cqw}
+  .sf{flex-wrap:nowrap;gap:1.2cqw}.sf div{padding:1.5cqw}.sf b{font-size:2.3cqw}.sf strong{font-size:1.6cqw}.sf small{font-size:1.22cqw}
+  .cover{gap:2cqw}.cover svg{width:6cqw;height:6cqw}.cover h2{font-size:5.4cqw}.cover .big{font-size:2.4cqw}
+  .sk{grid-template-columns:1fr 1fr;gap:1.4cqw}.sk li{padding:1.8cqw 2cqw;font-size:1.75cqw}
+}
+
+/* Blog */
+.posts{display:grid;gap:0;border-top:1px solid var(--line)}
+.post-row{display:grid;grid-template-columns:9rem minmax(0,1fr) auto;gap:1.5rem;align-items:baseline;padding:1.6rem 0;border-bottom:1px solid var(--line);text-decoration:none}
+.post-row:hover h3{color:var(--accent)}
+.post-row h3{font-family:var(--display);font-weight:650;font-size:1.45rem;letter-spacing:-.015em;margin:0 0 .3rem;line-height:1.15;transition:color .15s}
+.post-row p{margin:0;color:var(--muted)}
+@media (max-width:700px){.post-row{grid-template-columns:1fr;gap:.4rem}}
+article.post{max-width:44rem;padding-bottom:2rem}
+article.post .meta{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+article.post h2{font-family:var(--display);font-weight:700;font-size:1.55rem;letter-spacing:-.015em;margin:2.25rem 0 .75rem}
+article.post p,article.post li{font-size:1.1rem;line-height:1.75}
+article.post p{margin:0 0 1.2rem}
+article.post ul{padding-left:1.25rem;margin:0 0 1.2rem}
+article.post blockquote{margin:0 0 1.2rem;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--accent);font-size:1.15rem}
+article.post code{font-family:var(--mono);font-size:.92em;background:var(--sunk);padding:.1rem .35rem;border-radius:5px}
+article.post h3{font-size:1.2rem;margin:1.75rem 0 .5rem}
+article.post a{color:var(--accent)}
+.draft-note{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:.8rem 1rem;font-size:.95rem;margin-bottom:1.5rem}
+
+/* Videos */
+.vid{aspect-ratio:16/9;max-width:100%;border-radius:12px;border:1px dashed var(--line);background:repeating-linear-gradient(135deg,var(--sunk) 0 12px,transparent 12px 24px);display:grid;place-items:center;color:var(--muted);position:relative}
+.vid .play{width:54px;height:54px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:1.1rem;color:var(--fg)}
+.empty{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.6rem;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:1.5rem;align-items:center;margin-bottom:1.5rem}
+.empty h2{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:-.015em;margin:0 0 .4rem}
+.empty p{margin:0;color:var(--muted)}
+@media (max-width:640px){.empty{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding-bottom:1rem}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+.addr{display:flex;align-items:center;justify-content:space-between;gap:.75rem;background:var(--sunk);border-radius:10px;padding:.7rem .9rem;flex-wrap:wrap}
+.addr code{font-family:var(--mono);font-size:.95rem;user-select:all;word-break:break-all}
+.copy{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:.35rem .75rem;cursor:pointer;font-size:.88rem}
+.soc{list-style:none;margin:0;padding:0}
+.soc li{border-top:1px solid var(--line)}
+.soc a{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 0;text-decoration:none}
+.soc a span:last-child{color:var(--muted);font-family:var(--mono);font-size:.9rem}
+.soc a:hover span:first-child{color:var(--accent)}
+
+footer{border-top:1px solid var(--line);padding-block:1.8rem 2.4rem;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.theme{border:1px solid var(--line);background:none;border-radius:8px;padding:.35rem .8rem;cursor:pointer;color:var(--muted)}
+</style>
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="logo" href="#home"><i>SM</i>Shashank Mishra</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="links">Menu</button>
+    <ul class="links" id="links">
+      <li><a href="#about" data-nav="about">About</a></li>
+      <li><a href="#ventures" data-nav="ventures">Ventures</a></li>
+      <li><a href="#work" data-nav="work">Work</a></li>
+      <li><a href="#blog" data-nav="blog">Blog</a></li>
+      <li><a href="#videos" data-nav="videos">Videos</a></li>
+      <li><a href="#contact" data-nav="contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<div class="view" data-view="home" data-title="Shashank Mishra">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="who"><span class="pill blue">Founder, AUR Ventures</span><span class="label">Prayagraj, India</span></div>
+        <h1 tabindex="-1">I build brands, communities and the <em>companies</em> behind them.</h1>
+        <p class="lede">I’m Shashank Mishra, a social media and community manager turned founder. I run AUR Ventures, home to a digital marketing studio, a print studio and a scheduling tool in the making.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#ventures">See my ventures →</a>
+          <a class="btn" href="#about">About me</a>
+        </div>
+      </div>
+      <aside class="now live" aria-label="What I’m doing now">
+        <div class="now-head"><span class="label" id="now-label">Now · November 2026</span><span class="pill ok" id="now-pill">Open to work</span></div>
+        <ul id="now-list">
+          <li><span class="dot ok pulse"></span><div><strong>Growing AUR Studio</strong><small>Social, ads and community for medical and Web3 brands.</small></div></li>
+          <li><span class="dot warn"></span><div><strong>Building a scheduling tool</strong><small>Our own post scheduler, starting with Instagram, LinkedIn and X.</small></div></li>
+          <li><span class="dot"></span><div><strong>Writing and filming</strong><small>Notes from the work on the blog. Videos coming soon.</small></div></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="facts">
+      <div><b>2+ yrs</b><span>In social &amp; community roles</span></div>
+      <div><b>~40%</b><span>Engagement lift, in both roles</span></div>
+      <div><b>3</b><span>Ventures under AUR</span></div>
+      <div><b>7</b><span>Platforms managed</span></div>
+    </div>
+  </div>
+
+  <section class="band"><div class="wrap">
+    <div class="band-head"><h2>What I’m building</h2><a href="#ventures">All ventures →</a></div>
+    <div class="grid g3">
+      <a class="card" href="#ventures"><div class="top"><span class="label">AUR Studio</span><span class="pill ok">Taking clients</span></div><h3>Digital marketing for medical and Web3 brands</h3><p>Social media, performance ads, community and Google profile growth.</p><span class="go">Learn more →</span></a>
+      <a class="card" href="#ventures"><div class="top"><span class="label">AUR Printing Studio</span><span class="pill">Local</span></div><h3>Print and offline branding in Prayagraj</h3><p>Flex banners and print media for local businesses.</p><span class="go">Learn more →</span></a>
+      <a class="card" href="#ventures"><div class="top"><span class="label">Scheduling tool</span><span class="pill warn">In development</span></div><h3>Our own social post scheduler</h3><p>Built from scratch so the studio owns its publishing stack.</p><span class="go">Learn more →</span></a>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="band-head"><h2>Latest writing</h2><a href="#blog">All posts →</a></div>
+    <div class="grid g2" id="home-posts"></div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="band-head"><h2>Featured work</h2><a href="#work">All work →</a></div>
+    <a class="card wcard" href="#carewell" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:1.5rem;align-items:center">
+      <div class="vis v-care">CareWell Family Clinic</div>
+      <div style="display:grid;gap:.6rem"><span class="label">Healthcare · Concept project</span><h3>A 30-day social strategy for a family clinic</h3><p>The full 17-slide deck plays right on the project page.</p><span class="go">View project →</span></div>
+    </a>
+  </div></section>
+  <div class="wrap next"><a href="#about"><span class="label">Next</span><span>About →</span></a></div>
+</div>
+
+<!-- ABOUT -->
+<div class="view" data-view="about" data-title="About · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">About</span><h1 tabindex="-1">Hi, I’m Shashank.</h1><p>Social media and community manager, founder of AUR Ventures, based in Prayagraj.</p></div>
+    <div class="about">
+      <div class="photo">Your photo goes here</div>
+      <div class="prose">
+        <p class="big">I help brands become places people want to come back to, and I’m now building my own company around that work.</p>
+        <p>I’ve spent over two years building and growing online communities across several brands and industries. My work covers content strategy, editorial calendars, organic growth, moderation and analytics on Instagram, Facebook, LinkedIn, X, YouTube, Telegram and Discord.</p>
+        <p>In December 2025 I started AUR Ventures. It has two working businesses: AUR Studio, a digital marketing studio focused on medical and Web3 brands, and AUR Printing Studio, a local print shop for flex banners and offline branding. I’m also building our own social media scheduling tool so the studio doesn’t depend on monthly subscriptions as it grows.</p>
+        <p>I use AI-assisted workflows with ChatGPT and Claude to move faster on research, ideas and drafts, and spend the time saved on strategy and real conversations with communities.</p>
+        <h2>Skills</h2>
+        <div class="chips"><span>Social media strategy</span><span>Community management</span><span>Moderation</span><span>Content calendars</span><span>Copywriting</span><span>Performance marketing</span><span>Audience research</span><span>Social listening</span><span>Analytics &amp; reporting</span><span>AI-assisted workflows</span></div>
+        <h2>Tools</h2>
+        <div class="chips"><span>Meta Business Suite</span><span>Google Analytics</span><span>X Analytics</span><span>Buffer</span><span>Canva</span><span>Notion</span><span>ClickUp</span><span>Discord</span><span>Slack</span><span>Microsoft Teams</span><span>ChatGPT</span><span>Claude</span></div>
+        <h2>Journey</h2>
+        <ol class="tl">
+          <li><span class="when">Dec 2025 – now</span><div><h3>Founder</h3><p class="org">AUR Ventures</p><p>Running AUR Studio and AUR Printing Studio, and building our scheduling tool. Improved community engagement by about 40% with consistent, data-informed content.</p></div></li>
+          <li><span class="when">Jul 2024 – Dec 2025</span><div><h3>Social Media &amp; Community Manager</h3><p class="org">Bitgoro Media</p><p>Grew and moderated communities across several platforms, built content calendars and worked with the creative team. Lifted engagement by about 40% and improved response times.</p></div></li>
+          <li><span class="when">2021 – 2024</span><div><h3>B.Sc. Biology / Biological Sciences</h3><p class="org">Prof. Rajendra Singh University</p><p>A science background that shapes how I write for healthcare brands.</p></div></li>
+        </ol>
+        <h2>Certifications &amp; languages</h2>
+        <div class="chips"><span>Google Digital Marketing</span><span>HubSpot Social Media</span><span>Meta Social Media</span><span>English · professional</span><span>Hindi · native</span><span>German · elementary</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap next"><a href="#ventures"><span class="label">Next</span><span>Ventures →</span></a></div>
+</div>
+
+<!-- VENTURES -->
+<div class="view" data-view="ventures" data-title="Ventures · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Ventures</span><h1 tabindex="-1">The companies I’m building</h1><p>Everything sits under one parent company, so each business can stay focused on its own customers.</p></div>
+    <div class="parent">
+      <div><span class="label">Parent company</span><h2>AUR Ventures</h2><p>Founded in December 2025. AUR Ventures owns the studio, the print shop and the software we build in-house.</p></div>
+      <dl>
+        <div><dt>Founded</dt><dd>December 2025</dd></div>
+        <div><dt>Based in</dt><dd>Prayagraj, India</dd></div>
+        <div><dt>Role</dt><dd>Founder</dd></div>
+      </dl>
+    </div>
+    <div class="venture">
+      <div><span class="pill ok">Taking clients</span><h3>AUR Studio</h3><p class="tag">Digital marketing studio for medical and Web3 brands.</p>
+        <div class="meta"><span>Handle <code>@withaurstudio</code></span><span>Email <code>withaurstudio@gmail.com</code></span></div></div>
+      <ul>
+        <li><b>Social media management</b><span>Planning, content and posting across the platforms your audience uses.</span></li>
+        <li><b>Performance marketing</b><span>Ad campaigns managed for results, not just reach.</span></li>
+        <li><b>Community management</b><span>Moderation, replies and rituals that keep members engaged.</span></li>
+        <li><b>Google profile growth</b><span>A stronger Google Business Profile so local patients and customers find you.</span></li>
+        <li><b>Pricing</b><span>Every brief is different, so we agree scope and cost together on a call.</span></li>
+      </ul>
+    </div>
+    <div class="venture">
+      <div><span class="pill">Local · Prayagraj</span><h3>AUR Printing Studio</h3><p class="tag">Print media and offline branding for businesses in the city.</p></div>
+      <ul>
+        <li><b>Flex banners</b><span>Shopfronts, events and promotions.</span></li>
+        <li><b>Print media</b><span>Offline branding that matches a brand’s online look.</span></li>
+      </ul>
+    </div>
+    <div class="venture">
+      <div><span class="pill warn">In development</span><h3>Scheduling tool</h3><p class="tag">Our own social media scheduler, owned by AUR Ventures. Name coming soon.</p></div>
+      <ul>
+        <li><b>Why build it</b><span>Subscription tools get expensive as client work grows. Owning the tool keeps costs down and lets us shape it around how the studio works.</span></li>
+        <li><b>First version</b><span>Scheduling and auto-posting to Instagram, LinkedIn and X, designed mobile-first.</span></li>
+        <li><b>What’s next</b><span>Refine it in daily use, then apply for platform API approval and possibly open it to other teams.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap next"><a href="#work"><span class="label">Next</span><span>Work →</span></a></div>
+</div>
+
+<!-- WORK -->
+<div class="view" data-view="work" data-title="Work · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Work</span><h1 tabindex="-1">Selected work</h1><p>Case studies, with the documents built in and the reasoning behind each choice.</p></div>
+    <div class="grid g3">
+      <a class="card wcard" href="#carewell"><div class="vis v-care">Your neighbourhood care partner</div><div class="top"><span class="label">CareWell Family Clinic</span><span class="pill">Concept</span></div><h3>30-day social strategy for a family clinic</h3><p>Strategy, calendar and community workflow, with the full deck on the page.</p><span class="go">View project →</span></a>
+      <a class="card wcard" href="#ventures"><div class="vis v-aur">AUR Studio’s own channels</div><div class="top"><span class="label">AUR Studio</span><span class="pill warn">In progress</span></div><h3>Growing the studio in public</h3><p>The studio’s own social accounts double as a live case study. Results will be shared here as they come in.</p><span class="go">About the studio →</span></a>
+      <a class="card wcard" href="#about"><div class="vis v-bit">From audience to community</div><div class="top"><span class="label">Bitgoro Media</span><span class="pill">2024–25</span></div><h3>Community growth across platforms</h3><p>Moderation, feedback loops and partner relationships that lifted engagement by about 40%.</p><span class="go">See the role →</span></a>
+    </div>
+  </div>
+  <div class="wrap next"><a href="#blog"><span class="label">Next</span><span>Blog →</span></a></div>
+</div>
+
+<!-- CAREWELL -->
+<div class="view" data-view="carewell" data-parent="work" data-title="CareWell Family Clinic · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><a class="back" href="#work">← All work</a><span class="label">Healthcare · Concept project</span><h1 tabindex="-1">CareWell Family Clinic</h1><p>A social media strategy and 30-day content calendar for a small neighbourhood clinic starting from zero, with a small team and a modest budget.</p></div>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>Strategy, content, community</dd></div>
+      <div><dt>Platforms</dt><dd>Instagram, Facebook, LinkedIn, YouTube, Telegram</dd></div>
+      <div><dt>Deliverable</dt><dd>17-slide strategy deck</dd></div>
+      <div><dt>Type</dt><dd>Portfolio concept, no client results claimed</dd></div>
+    </dl>
+    <div class="block"><h2>The deck</h2><div style="min-width:0">
+      <div class="deck" id="deck">
+        <div class="deck-bar"><div class="t">CareWell strategy <span id="d-name"></span></div>
+          <div class="ctrl"><button class="ib" id="d-prev" type="button" aria-label="Previous slide">←</button><span class="count" id="d-count" aria-live="polite"></span><button class="ib" id="d-next" type="button" aria-label="Next slide">→</button><button class="ib" id="d-full" type="button">Expand</button></div></div>
+        <div class="stage" id="d-stage"></div>
+        <div class="prog"><i id="d-prog"></i></div>
+      </div>
+      <p class="hint">Use the arrows, swipe on a phone, or press ← and →. Esc closes the expanded view.</p>
+    </div></div>
+    <div class="block"><h2>Why these choices</h2><div>
+      <div class="why"><h3>Trust before volume</h3><p>People pick a clinic they trust, not the one that posts most. A small team also can’t sustain daily high-production content, so the plan favours a realistic cadence of useful posts.</p></div>
+      <div class="why"><h3>Five platforms, one job each</h3><p>Instagram for visual stories, Facebook for events and local groups, LinkedIn for partnerships, YouTube for longer explainers, Telegram for reminders families forward to each other. Distinct jobs stop the team posting the same thing five times.</p></div>
+      <div class="why"><h3>Useful first, promotional second</h3><p>Education and trust posts earn attention before conversion posts ask for appointments, so the ask feels like a natural next step.</p></div>
+      <div class="why"><h3>Clinical guardrails</h3><p>Every tip ends with a nudge to see a qualified clinician, and clinical questions in comments go to staff. One wrong answer can undo months of trust.</p></div>
+      <div class="why"><h3>A day-by-day calendar</h3><p>Platform, format, hook, call to action and objective for each post let a small team batch a week at a time and keep the pillars balanced.</p></div>
+      <div class="why"><h3>KPIs, not invented numbers</h3><p>With no live data, the deck defines what to measure and how to test ads one variable at a time instead of showing made-up results.</p></div>
+    </div></div>
+    <div class="block"><h2>Delivered</h2><dl class="nums">
+      <div><dt>30</dt><dd>Days of planned posts with hooks and calls to action</dd></div>
+      <div><dt>5</dt><dd>Platforms in one message system</dd></div>
+      <div><dt>4</dt><dd>Step community workflow with clinical escalation</dd></div>
+      <div><dt>5</dt><dd>KPIs to track from day one</dd></div>
+    </dl></div>
+  </div>
+  <div class="wrap next"><a href="#work"><span class="label">Back to</span><span>All work →</span></a></div>
+</div>
+
+<!-- BLOG -->
+<div class="view" data-view="blog" data-title="Blog · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Blog</span><h1 tabindex="-1">Notes from the work</h1><p>What I’m learning about communities, social media and building a small company.</p></div>
+    <div class="posts" id="post-list"></div>
+  </div>
+  <div class="wrap next"><a href="#videos"><span class="label">Next</span><span>Videos →</span></a></div>
+</div>
+
+<div id="post-views"></div>
+
+<!-- VIDEOS -->
+<div class="view" data-view="videos" data-title="Videos · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Videos</span><h1 tabindex="-1">Videos</h1><p>Short videos on social media, community building and running AUR Ventures.</p></div>
+    <div id="video-area"></div>
+  </div>
+  </div>
+  <div class="wrap next"><a href="#contact"><span class="label">Next</span><span>Contact →</span></a></div>
+</div>
+
+<!-- CONTACT -->
+<div class="view" data-view="contact" data-title="Contact · Shashank Mishra" hidden>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Contact</span><h1 tabindex="-1">Let’s talk</h1><p>Hiring, collaborating, or need help with your brand’s social media? Write to me and I’ll reply within two days.</p></div>
+    <div class="contact">
+      <div class="card">
+        <span class="label">Me, personally</span>
+        <h3>Roles, collaborations, speaking</h3>
+        <div class="addr"><code id="e1">withmrshashank@gmail.com</code><button class="copy" type="button" data-copy="e1">Copy</button></div>
+        <ul class="soc">
+          <li><a href="https://www.linkedin.com/in/withmrshashank/" target="_blank" rel="noopener"><span>LinkedIn</span><span>/in/withmrshashank</span></a></li>
+          <li><a href="https://www.instagram.com/withmrshashank/" target="_blank" rel="noopener"><span>Instagram</span><span>@withmrshashank</span></a></li>
+          <li><a href="https://x.com/withmrshashank" target="_blank" rel="noopener"><span>X</span><span>@withmrshashank</span></a></li>
+          <li><a href="https://www.youtube.com/@withmrshashank" target="_blank" rel="noopener"><span>YouTube</span><span>@withmrshashank</span></a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="label">AUR Studio</span>
+        <h3>Marketing for your brand</h3>
+        <p>For social media, ads, community or Google profile work for a medical or Web3 brand.</p>
+        <div class="addr"><code id="e2">withaurstudio@gmail.com</code><button class="copy" type="button" data-copy="e2">Copy</button></div>
+        <ul class="soc"><li><a href="https://www.instagram.com/withaurstudio/" target="_blank" rel="noopener"><span>Instagram</span><span>@withaurstudio</span></a></li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap next"><a href="#home"><span class="label">Back to</span><span>Home →</span></a></div>
+</div>
+
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Shashank Mishra · AUR Ventures</span><button class="theme" id="theme" type="button">Switch theme</button></div></footer>
+
+<script>
+(function(){
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---------- Site content (edited from admin.html, stored in content.json) ---------- */
+  var DEFAULT = {"now": {"label": "November 2026", "openToWork": true, "items": [{"title": "Growing AUR Studio", "text": "Social, ads and community for medical and Web3 brands.", "status": "ok"}, {"title": "Building a scheduling tool", "text": "Our own post scheduler, starting with Instagram, LinkedIn and X.", "status": "warn"}, {"title": "Writing and filming", "text": "Notes from the work on the blog. Videos coming soon.", "status": "blue"}]}, "videos": [], "posts": [{"slug": "why-own-scheduler", "title": "Why I’m building our own scheduling tool", "date": "2026-11-16", "draft": true, "summary": "Buffer works well for us today. Here’s why AUR Ventures is building its own anyway.", "body": "Right now AUR Studio schedules posts with Buffer, and it does the job. So why build our own?\n\n## Subscriptions grow with you\n\nEvery new client means more accounts, more seats and a bigger monthly bill. For a young studio, that cost climbs faster than revenue. Owning the tool turns an ever-growing subscription into something we control.\n\n## Built around how we work\n\nOff-the-shelf tools are made for everyone. Ours can be shaped around the way the studio plans, approves and publishes content, without paying for features we never use.\n\n## Starting small\n\nThe first version focuses on three platforms:\n\n- Instagram\n- LinkedIn\n- X\n\nIt’s designed for mobile first, because that’s where most of my day-to-day social work happens.\n\n## What comes next\n\nWe’ll use it daily inside the studio, fix what’s missing, then apply for official platform API approval. If it works as well as I hope, we may open it up to other teams too. I’ll share progress here as it happens."}, {"slug": "community-looked-after", "title": "What makes a community feel looked after", "date": "2026-11-15", "draft": true, "summary": "Lessons from growing communities across several platforms: voice, speed and closing the loop.", "body": "Followers watch. Community members talk back, to the brand and to each other. Getting from one to the other comes down to a few habits.\n\n## One voice, everywhere\n\nMembers notice when replies sound like different people. A consistent brand voice across platforms tells people someone is paying attention.\n\n## Speed matters\n\nA quick, thoughtful reply does more for trust than a perfect one a day later. Improving response times was one of the biggest drivers of engagement in my work at Bitgoro Media.\n\n## Close the loop\n\nWhen members share feedback, pass it to the team and tell members what changed. People keep contributing when they can see their ideas go somewhere.\n\n## Set guardrails early\n\nClear guidelines and a plan for difficult questions protect the community. In healthcare, that means routing clinical questions to qualified staff, never answering them in a comment thread.\n\nNone of this is complicated. It just has to happen every day."}]};
+  function h(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function inline(t){
+    t=h(t);
+    t=t.replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");
+    return t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,function(m,txt,url){return /^(https?:|mailto:|#)/i.test(url)?'<a href="'+url+'"'+(/^https?:/i.test(url)?' target="_blank" rel="noopener"':'')+'>'+txt+'</a>':txt;});
+  }
+  function md(src){
+    return String(src||"").replace(/\r/g,"").split(/\n\s*\n/).map(function(b){
+      b=b.trim(); if(!b) return "";
+      var L=b.split("\n");
+      if(L.every(function(l){return /^\s*[-*] /.test(l)})) return "<ul>"+L.map(function(l){return "<li>"+inline(l.replace(/^\s*[-*] /,""))+"</li>"}).join("")+"</ul>";
+      if(L.every(function(l){return /^\s*\d+\. /.test(l)})) return "<ol>"+L.map(function(l){return "<li>"+inline(l.replace(/^\s*\d+\. /,""))+"</li>"}).join("")+"</ol>";
+      if(/^### /.test(b)) return "<h3>"+inline(b.slice(4))+"</h3>";
+      if(/^## /.test(b)) return "<h2>"+inline(b.slice(3))+"</h2>";
+      if(/^# /.test(b)) return "<h2>"+inline(b.slice(2))+"</h2>";
+      if(L.every(function(l){return /^> ?/.test(l)})) return "<blockquote>"+inline(L.map(function(l){return l.replace(/^> ?/,"")}).join(" "))+"</blockquote>";
+      return "<p>"+L.map(inline).join("<br>")+"</p>";
+    }).join("");
+  }
+  function fmtDate(d){var x=new Date(d+"T00:00:00");return isNaN(x)?h(d):x.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});}
+  function mins(t){return Math.max(1,Math.round(String(t||"").split(/\s+/).length/200))+" min";}
+  function ytId(u){var m=String(u||"").match(/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([A-Za-z0-9_-]{11})/);return m?m[1]:null;}
+  var list=document.getElementById("post-list"),home=document.getElementById("home-posts"),pv=document.getElementById("post-views");
+  function renderContent(c){
+    var posts=(c.posts||[]).filter(function(p){return !p.draft && p.slug && p.title}).sort(function(a,b){return (b.date||"").localeCompare(a.date||"")});
+    list.innerHTML="";home.innerHTML="";pv.innerHTML="";
+    if(!posts.length){
+      list.innerHTML='<p style="padding:2rem 0;color:var(--muted)">First posts are coming soon.</p>';
+      home.innerHTML='<div class="card"><h3>First posts are coming soon</h3><p>Notes on communities, social media and building AUR Ventures.</p></div>';
+    }
+    posts.forEach(function(p,i){
+      var meta=fmtDate(p.date)+" · "+mins(p.body)+" read";
+      list.insertAdjacentHTML("beforeend",'<a class="post-row" href="#'+h(p.slug)+'"><span class="label">'+meta+'</span><div><h3>'+h(p.title)+'</h3><p>'+h(p.summary)+'</p></div><span></span></a>');
+      if(i<2) home.insertAdjacentHTML("beforeend",'<a class="card" href="#'+h(p.slug)+'"><div class="top"><span class="label">'+meta+'</span></div><h3>'+h(p.title)+'</h3><p>'+h(p.summary)+'</p><span class="go">Read post →</span></a>');
+      pv.insertAdjacentHTML("beforeend",'<div class="view" data-view="'+h(p.slug)+'" data-parent="blog" data-title="'+h(p.title)+' · Shashank Mishra" hidden><div class="wrap"><div class="page-head"><a class="back" href="#blog">← All posts</a><span class="label">'+meta+'</span><h1 tabindex="-1">'+h(p.title)+'</h1><p>'+h(p.summary)+'</p></div><article class="post">'+md(p.body)+'</article></div><div class="wrap next"><a href="#blog"><span class="label">Back to</span><span>All posts →</span></a></div></div>');
+    });
+    var n=c.now||{};
+    document.getElementById("now-label").textContent="Now · "+(n.label||"");
+    var pill=document.getElementById("now-pill"); pill.hidden=!n.openToWork;
+    document.getElementById("now-list").innerHTML=(n.items||[]).map(function(it,i){return '<li><span class="dot '+({ok:"ok",warn:"warn"}[it.status]||"")+(i===0&&it.status==="ok"?" pulse":"")+'"></span><div><strong>'+h(it.title)+'</strong><small>'+h(it.text)+'</small></div></li>';}).join("");
+    var vids=(c.videos||[]).filter(function(v){return ytId(v.url)});
+    var va=document.getElementById("video-area");
+    if(!vids.length){
+      va.innerHTML='<div class="empty"><div><h2>First videos are on the way</h2><p>New videos will appear here as they go live on YouTube.</p></div><a class="btn primary" href="https://www.youtube.com/@withmrshashank" target="_blank" rel="noopener">YouTube @withmrshashank ↗</a></div><div class="grid g3" aria-hidden="true"><div class="vid"><span class="play">▶</span></div><div class="vid"><span class="play">▶</span></div><div class="vid"><span class="play">▶</span></div></div>';
+    } else {
+      va.innerHTML='<div class="grid g3">'+vids.map(function(v){var id=ytId(v.url);return '<div class="card"><button class="vid vbtn" type="button" data-yt="'+id+'" aria-label="Play '+h(v.title)+'" style="cursor:pointer;border-style:solid;width:100%"><span class="play">▶</span></button><h3>'+h(v.title)+'</h3>'+(v.text?'<p>'+h(v.text)+'</p>':'')+'<a class="go" href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>';}).join("")+'</div>';
+    }
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest(".vbtn"); if(!b) return;
+    var f=document.createElement("iframe");
+    f.src="https://www.youtube-nocookie.com/embed/"+b.getAttribute("data-yt")+"?autoplay=1&rel=0";
+    f.title="YouTube video";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;
+    f.style.cssText="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;display:block";
+    b.replaceWith(f);
+  });
+  renderContent(DEFAULT);
+
+  /* ---------- CareWell deck ---------- */
+  var F="CareWell Family Clinic · Social Media Strategy";
+  var mark='<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#14504F" stroke="#D5EAE3" stroke-width="2"/><rect x="26" y="14" width="12" height="36" rx="3" fill="#E2725B"/><rect x="14" y="26" width="36" height="12" rx="3" fill="#F4F8F6"/></svg>';
+  function cards(a,c){return '<div class="sg" style="--c:'+(c||a.length)+'">'+a.map(function(x){return '<div class="sc">'+(x.k?'<p class="k">'+x.k+'</p>':'')+'<h3>'+x.t+'</h3>'+(x.d?'<p>'+x.d+'</p>':'')+'</div>';}).join("")+'</div>';}
+  function lst(a){return '<ol class="sl">'+a.map(function(x,i){return '<li><b>'+String(i+1).padStart(2,"0")+'</b><span>'+x[0]+(x[1]?' <small>'+x[1]+'</small>':'')+'</span></li>';}).join("")+'</ol>';}
+  function flw(a){return '<div class="sf">'+a.map(function(x,i){return '<div><b>'+(i+1)+'</b><strong>'+x[0]+'</strong>'+(x[1]?'<small>'+x[1]+'</small>':'')+'</div>';}).join("")+'</div>';}
+  function tbl(r){return '<div class="stw"><table class="st"><tr><th>DAY</th><th>PLATFORM</th><th>FORMAT</th><th>TOPIC / HOOK</th><th>CTA</th><th>OBJECTIVE</th></tr>'+r.map(function(x){return '<tr>'+x.map(function(c){return '<td>'+c+'</td>';}).join("")+'</tr>';}).join("")+'</table></div>';}
+  function S(n,t,s,b,d){return {name:n,html:'<div class="slide'+(d?' dark':'')+'"><h2>'+t+'</h2>'+(s?'<p class="sub">'+s+'</p>':'')+b+'</div>'};}
+  var cn="Editable working calendar. General information only; clinical questions are escalated.";
+  var slides=[
+    {name:"Cover",html:'<div class="slide dark cover">'+mark+'<h2>CareWell Family Clinic</h2><p class="big">Social Media Strategy &amp; 30-Day Content Calendar</p><p class="note">A concept project for portfolio demonstration, not commissioned client work · Shashank Mishra</p></div>'},
+    S("Context","Project Context &amp; Assumptions","A practical brief for a small neighbourhood clinic.",'<p class="note">CareWell is a fictional local provider starting without a structured social presence. The strategy prioritises trust, usefulness and sustainable execution over volume.</p>'+cards([{k:"Limited resources",t:"Small team, modest budget"},{k:"Business goal",t:"Awareness, trust, engagement, discovery"},{k:"Clinical guardrail",t:"No medical claims",d:"Encourage consultation with qualified clinicians."}])),
+    S("Objectives","Objectives","Five outcomes connect useful content to sustainable growth.",lst([["Build brand trust and local awareness"],["Educate on general health &amp; wellness"],["Increase service and availability awareness"],["Drive appointment inquiries"],["Grow engagement and patient loyalty"]])),
+    S("Audience","Target Audience","Local, digitally active, and looking for clarity they can trust.",cards([{k:"Primary",t:"Local families &amp; adults 25–55",d:"Health-conscious, digitally active, seeking an approachable care partner."},{k:"Secondary",t:"Neighbours who influence care",d:"Seniors, caregivers, local businesses and organisers."}],2)+'<div class="sch"><span>Trustworthy information</span><span>Friendly tone</span><span>Instagram, Facebook &amp; Telegram</span></div>'),
+    S("Positioning","Positioning &amp; Messaging","One clear promise, reinforced everywhere.",'<p class="sq">Your neighbourhood family healthcare partner: accessible and caring.</p><div class="sch"><span>Trust &amp; Expertise</span><span>Community Focus</span><span>Convenience &amp; Care</span><span>Wellness Education</span></div><p class="note">Tone: friendly · professional · empathetic · clear</p>',true),
+    S("Pillars","Content Pillars","Useful first, promotional second.",lst([["Educational","Health tips &amp; preventive care"],["Trust-Building","Staff stories &amp; testimonials"],["Community","Events, partners &amp; involvement"],["Service Awareness","Services, access &amp; hours"],["Conversion","Reminders, offers &amp; clear CTAs"]])),
+    S("Platforms","Platform Strategy","Each channel has a distinct job; one message system connects them.",cards([{t:"Instagram",d:"Visual stories, community moments, reels"},{t:"Facebook",d:"Events, local groups, Q&amp;A"},{t:"LinkedIn",d:"Partnerships and updates"},{t:"YouTube",d:"Education and clinic tours"},{t:"Telegram",d:"Direct updates and reminders"}],5)),
+    S("Calendar 1–10","30-Day Calendar (Days 1–10)",cn,tbl([["1","Instagram","Carousel","5 everyday wellness habits","Save &amp; share","Education"],["2","Facebook","Post","Meet CareWell: our care promise","Follow us","Trust"],["3","Instagram","Reel","A calm clinic tour","Book a visit","Service"],["4","Telegram","Tip","Hydration reminder","Forward to family","Education"],["5","Facebook","Event","Neighbourhood wellness Q&amp;A","RSVP","Community"],["6","LinkedIn","Update","Why local care partnerships matter","Connect","Community"],["7","Instagram","Photo","Meet our family physician","Ask a question","Trust"],["8","YouTube","Video","Preparing for a routine checkup","Subscribe","Education"],["9","Telegram","Reminder","Weekend opening hours","Save contact","Service"],["10","Instagram","Story","Q&amp;A: general wellness","Consult a clinician","Engagement"]])),
+    S("Calendar 11–20","30-Day Calendar (Days 11–20)",cn,tbl([["11","Facebook","Post","Family care services overview","View services","Service"],["12","Instagram","Carousel","When to schedule a checkup","Book inquiry","Conversion"],["13","Telegram","Update","Same-week availability","Message us","Conversion"],["14","LinkedIn","Post","Clinic collaboration spotlight","Connect","Community"],["15","Instagram","Reel","A day with our care team","Follow","Trust"],["16","Facebook","Q&amp;A","Common appointment questions","Comment","Engagement"],["17","YouTube","Video","Preventive care basics","Consult clinician","Education"],["18","Instagram","Story","Poll: your wellness priority","Vote","Engagement"],["19","Facebook + TG","Reminder","Clinic hours &amp; directions","Book now","Service"],["20","Instagram","Graphic","Friendly appointment reminder","Send inquiry","Conversion"]])),
+    S("Calendar 21–30","30-Day Calendar (Days 21–30)",cn,tbl([["21","Instagram","Challenge","7-day hydration check-in","Join in","Engagement"],["22","Facebook","Post","Community partner feature","Tag a neighbour","Community"],["23","Telegram","Tip","Simple sleep routine","Consult clinician","Education"],["24","Instagram","Photo","Front desk team spotlight","Say hello","Trust"],["25","YouTube","Short","What to bring to your visit","Subscribe","Service"],["26","Facebook","Event","Community wellness morning","RSVP","Community"],["27","LinkedIn","Update","Month-in-review learning","Connect","Trust"],["28","Instagram","Carousel","Five questions for your clinician","Save","Education"],["29","Telegram + FB","Reminder","Next-week appointments","Book inquiry","Conversion"],["30","Instagram","Story","Monthly recap &amp; thanks","Book / follow","Conversion"]])),
+    S("Captions","Sample Captions","Friendly, concise copy with clear boundaries.",cards([{k:"Educational",t:"Small steps count",d:"A consistent sleep routine can support everyday wellbeing. Save this, and speak with a qualified clinician for advice tailored to you."},{k:"Meet the team",t:"Say hello to Maya",d:"Meet Maya, the friendly face helping CareWell families feel welcome. Drop a hello below!"},{k:"Service",t:"Routine appointments",d:"Need a routine family care appointment? Explore available times and send an inquiry today."},{k:"Community",t:"See you Saturday",d:"We’re at the neighbourhood wellness morning this Saturday. Stop by and bring your general questions."}],2)),
+    S("Community","Community Workflow","A light operating loop that protects trust.",flw([["Monitor","Daily checks"],["Respond or escalate","Clinical questions to staff"],["Engage","Local groups"],["Report","Weekly"]])+'<p class="note">Clinical questions are never answered speculatively.</p>'),
+    S("KPIs","KPI Framework","A measurement plan, not fabricated results.",lst([["Reach &amp; impressions","Visibility by platform"],["Engagement rate","Likes, comments and shares"],["Follower growth","Direction and momentum"],["Click-throughs","Booking or website intent"],["Sentiment","Themes in community response"]])),
+    S("Paid ads","Paid Ads Testing","A disciplined learning plan, without invented budgets.",cards([{k:"Test A",t:"Creative",d:"Visual format &amp; hook"},{k:"Test B",t:"Message",d:"Benefit &amp; call to action"}],2)+flw([["Test one variable"],["Compare quality signals"],["Refine targeting"],["Repeat"]])),
+    S("Execution","30-Day Execution","A repeatable cadence turns the calendar into delivery.",flw([["Create","Weekly batches"],["Approve","Clinical &amp; brand review"],["Schedule","Planned cadence"],["Monitor","Daily"],["Optimise","Weekly review"]])),
+    S("Summary","Summary","A practical system for earning attention and keeping trust.",'<ul class="sk"><li>Multi-platform, sized for a small clinic</li><li>Balanced mix from education to conversion</li><li>Clear community and measurement workflows</li><li>A realistic 30-day cadence built to last</li></ul>'),
+    {name:"Thank you",html:'<div class="slide dark cover">'+mark+'<h2>Thank you.</h2><p class="big">withmrshashank@gmail.com · @withmrshashank</p><p class="note">Concept project for portfolio demonstration only. No real client results are claimed.</p></div>'}
+  ];
+  slides.forEach(function(s,i){ if(s.html.indexOf(" cover")<0) s.html=s.html.replace(/<\/div>$/,'<div class="foot"><span>'+F+'</span><span>'+String(i+1).padStart(2,"0")+'</span></div></div>'); });
+  var deck=document.getElementById("deck"),stage=document.getElementById("d-stage"),prev=document.getElementById("d-prev"),nxt=document.getElementById("d-next"),full=document.getElementById("d-full"),cur=0,isFull=false;
+  function render(){stage.innerHTML=slides[cur].html;document.getElementById("d-count").textContent=(cur+1)+" / "+slides.length;document.getElementById("d-name").textContent="· "+slides[cur].name;document.getElementById("d-prog").style.width=((cur+1)/slides.length*100)+"%";prev.disabled=cur===0;nxt.disabled=cur===slides.length-1;}
+  function go(d){var n=Math.max(0,Math.min(slides.length-1,cur+d));if(n!==cur){cur=n;render();}}
+  function setFull(on){isFull=on;deck.classList.toggle("full",on);full.textContent=on?"Close":"Expand";document.body.style.overflow=on?"hidden":"";}
+  prev.onclick=function(){go(-1)};nxt.onclick=function(){go(1)};full.onclick=function(){setFull(!isFull)};
+  document.addEventListener("keydown",function(e){
+    if(document.querySelector('[data-view="carewell"]').hidden) return;
+    if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1);else if(e.key==="Escape"&&isFull)setFull(false);
+  });
+  var tx=null;
+  stage.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+  stage.addEventListener("touchend",function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);tx=null;});
+  render();
+
+  /* ---------- Router ---------- */
+  var navLinks=document.querySelectorAll("[data-nav]"),links=document.getElementById("links"),menu=document.getElementById("menu-btn"),first=true;
+  function route(soft){
+    var views=document.querySelectorAll("[data-view]");
+    var name=location.hash.replace(/^#/,"")||"home";
+    var target=document.querySelector('[data-view="'+name+'"]')||document.querySelector('[data-view="home"]');
+    if(isFull)setFull(false);
+    views.forEach(function(v){v.hidden=v!==target;});
+    var sec=target.getAttribute("data-parent")||target.getAttribute("data-view");
+    navLinks.forEach(function(a){if(a.getAttribute("data-nav")===sec)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+    document.title=target.getAttribute("data-title");
+    links.classList.remove("open");menu.setAttribute("aria-expanded","false");
+    if(soft) return;
+    window.scrollTo(0,0);
+    target.style.animation="none";void target.offsetWidth;target.style.animation="";
+    if(!first){var h=target.querySelector("h1");if(h)h.focus({preventScroll:true});}
+    first=false;
+  }
+  menu.onclick=function(){var o=links.classList.toggle("open");menu.setAttribute("aria-expanded",o?"true":"false");};
+  addEventListener("hashchange",function(){route()});route();
+  fetch("content.json?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(c){renderContent(c);route(true);}).catch(function(){});
+
+  /* ---------- Copy buttons ---------- */
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var el=document.getElementById(b.getAttribute("data-copy")),t=el.textContent;
+      function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected";}
+      try{navigator.clipboard.writeText(t).then(function(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1600)},sel);}catch(e){sel();}
+    });
+  });
+
+  /* ---------- Theme ---------- */
+  var root=document.documentElement;
+  try{var s=localStorage.getItem("theme");if(s)root.dataset.theme=s;}catch(e){}
+  document.getElementById("theme").onclick=function(){
+    var dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme=dark?"light":"dark";
+    try{localStorage.setItem("theme",root.dataset.theme);}catch(e){}
+  };
+})();
+</script>
+</body>
+</html>

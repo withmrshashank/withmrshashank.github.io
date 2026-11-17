@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Site Admin · Shashank Mishra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one-column admin console — connect card, tabbed editors, sticky publish bar */
+:root{
+  --bg:#F3F4F1; --surface:#FFFFFF; --sunk:#E8EAE5; --fg:#121519; --muted:#5B626A; --line:#D8DBD4;
+  --accent:#2E43D6; --accent-fg:#FFFFFF; --accent-soft:#E2E6FB; --ok:#1C7449; --ok-soft:#DDF0E5; --warn:#8F5A00; --warn-soft:#F6EAD2; --bad:#B42318; --bad-soft:#FBE4E1;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0E1013; --surface:#171A1F; --sunk:#1D2127; --fg:#ECEEF0; --muted:#9AA1AA; --line:#2A2F36;
+  --accent:#8E9CFF; --accent-fg:#0E1013; --accent-soft:#1F2442; --ok:#62D39C; --ok-soft:#163327; --warn:#E8B65C; --warn-soft:#3A2D14; --bad:#FF8A7A; --bad-soft:#3B1A16; color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:calc(6rem + env(safe-area-inset-bottom,0px))}
+[hidden]{display:none!important}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:52rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5;padding-top:env(safe-area-inset-top,0px)}
+.bar{display:flex;justify-content:space-between;align-items:center;height:60px;gap:1rem}
+.logo{font-family:var(--display);font-weight:700;font-size:1.1rem;display:flex;gap:.55rem;align-items:center}
+.logo i{width:28px;height:28px;border-radius:7px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal;font-size:.8rem;font-weight:800}
+.logo small{font-family:var(--mono);font-weight:400;font-size:.75rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+a{color:var(--accent)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,5vw,2.6rem);letter-spacing:-.025em;line-height:1.05;margin:2rem 0 .5rem}
+.lead{color:var(--muted);margin:0 0 1.5rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem;display:grid;gap:1rem;margin-bottom:1rem}
+.card h2{font-family:var(--display);font-weight:650;font-size:1.25rem;margin:0}
+label{display:grid;gap:.35rem;font-weight:500;font-size:.92rem;min-width:0}
+label small{font-weight:400;color:var(--muted)}
+input[type=text],input[type=password],input[type=date],input[type=url],textarea,select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:.65rem .8rem}
+textarea{min-height:16rem;resize:vertical;font-family:var(--mono);font-size:.92rem;line-height:1.6}
+textarea.short{min-height:4.5rem;font-family:var(--body);font-size:1rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+.check{display:flex;gap:.55rem;align-items:center;font-weight:500}
+.check input{width:1.1rem;height:1.1rem;accent-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.65rem 1rem;border-radius:9px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:500;text-decoration:none;color:var(--fg)}
+.btn:hover{border-color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btn.danger{color:var(--bad)}
+.btn.small{padding:.4rem .7rem;font-size:.88rem}
+.btn:disabled{opacity:.5;cursor:default}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem}
+.tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--line);margin:1.5rem 0 1rem;overflow-x:auto}
+.tab{border:none;background:none;padding:.7rem .9rem;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.list{display:grid;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.75rem;align-items:center;padding:.9rem 1rem;border-top:1px solid var(--line)}
+.item:first-child{border-top:none}
+.item b{display:block;font-weight:600;overflow-wrap:anywhere}
+.item small{color:var(--muted);font-family:var(--mono);font-size:.78rem}
+.empty{padding:1.5rem 1rem;color:var(--muted);text-align:center}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;padding:.15rem .5rem;border-radius:999px;margin-left:.4rem;vertical-align:middle}
+.pill.draft{background:var(--warn-soft);color:var(--warn)}
+.pill.live{background:var(--ok-soft);color:var(--ok)}
+.help{font-size:.88rem;color:var(--muted);background:var(--sunk);border-radius:10px;padding:.8rem 1rem}
+.help code{font-family:var(--mono);font-size:.85rem}
+.help ol{margin:.4rem 0 0;padding-left:1.2rem}
+.edtabs{display:flex;gap:.25rem}
+.preview{border:1px solid var(--line);border-radius:9px;padding:1rem 1.1rem;min-height:16rem;background:var(--bg);line-height:1.7;overflow-wrap:anywhere}
+.preview h2{font-family:var(--display);font-size:1.35rem;margin:1.2rem 0 .5rem}
+.preview h2:first-child{margin-top:0}
+.preview blockquote{margin:0 0 1rem;padding-left:.9rem;border-left:3px solid var(--accent)}
+.preview code{font-family:var(--mono);background:var(--sunk);padding:.05rem .3rem;border-radius:4px}
+.confirm{background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:.8rem 1rem;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.publish{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding:.8rem max(16px,env(safe-area-inset-right,0px)) calc(.8rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.publish .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:0}
+.status{font-size:.92rem;color:var(--muted);min-width:0}
+.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}.status.warn{color:var(--warn)}
+.nowitem{display:grid;gap:.6rem;padding:1rem;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <div class="logo"><i>SM</i>Site admin <small>private</small></div>
+  <div class="btns"><a class="btn small" href="./" target="_blank" rel="noopener">View site ↗</a><button class="btn small" id="signout" type="button" hidden>Sign out</button></div>
+</div></header>
+
+<main class="wrap">
+
+  <!-- CONNECT -->
+  <section id="connect">
+    <h1>Connect to GitHub</h1>
+    <p class="lead">Your site lives on GitHub, so this page saves your changes there. Connect once on each phone or computer you use.</p>
+    <div class="card">
+      <div class="row">
+        <label for="owner">GitHub username<input type="text" id="owner" value="withmrshashank" autocomplete="username" autocapitalize="off" spellcheck="false"></label>
+        <label for="repo">Repository<input type="text" id="repo" value="withmrshashank.github.io" autocapitalize="off" spellcheck="false"></label>
+      </div>
+      <label for="token">Access token <small>Saved only in this browser. Never share it.</small><input type="password" id="token" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>
+      <div class="btns"><button class="btn primary" id="connect-btn" type="button">Connect</button></div>
+      <p class="status" id="connect-msg" aria-live="polite"></p>
+      <div class="help">
+        <b>How to get a token (one time):</b>
+        <ol>
+          <li>On GitHub, open <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b>.</li>
+          <li>Tap <b>Generate new token</b>. Name it <code>Site admin</code> and pick an expiry (up to 1 year).</li>
+          <li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick your site repository.</li>
+          <li>Under <b>Permissions → Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>.</li>
+          <li>Tap <b>Generate token</b>, copy it and paste it above.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITOR -->
+  <section id="editor" hidden>
+    <h1>Your website</h1>
+    <p class="lead">Edit below, then tap <b>Publish</b>. Changes appear on your site within 1–2 minutes.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="posts" aria-selected="true" type="button">Blog posts</button>
+      <button class="tab" role="tab" data-tab="videos" aria-selected="false" type="button">Videos</button>
+      <button class="tab" role="tab" data-tab="now" aria-selected="false" type="button">Now panel</button>
+    </div>
+
+    <!-- Posts list -->
+    <div data-panel="posts">
+      <div class="btns" style="margin-bottom:1rem"><button class="btn primary" id="new-post" type="button">+ New post</button></div>
+      <div class="list" id="post-list"></div>
+    </div>
+
+    <!-- Post editor -->
+    <div data-panel="post-edit" hidden>
+      <div class="btns" style="margin-bottom:1rem"><button class="btn small" id="back-posts" type="button">← All posts</button></div>
+      <div class="card">
+        <label for="p-title">Title<input type="text" id="p-title"></label>
+        <label for="p-summary">Summary <small>One or two sentences shown on the blog list.</small><textarea class="short" id="p-summary"></textarea></label>
+        <div class="row">
+          <label for="p-date">Date<input type="date" id="p-date"></label>
+          <label for="p-slug">Web address <small>yoursite/#this-part</small><input type="text" id="p-slug" autocapitalize="off" spellcheck="false"></label>
+        </div>
+        <div style="display:grid;gap:.5rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap">
+            <b style="font-size:.92rem">Post</b>
+            <div class="edtabs"><button class="btn small" id="b-write" type="button">Write</button><button class="btn small" id="b-preview" type="button">Preview</button></div>
+          </div>
+          <textarea id="p-body" placeholder="Start writing…"></textarea>
+          <div class="preview" id="p-preview" hidden></div>
+          <p class="help" style="margin:0">Leave a blank line between paragraphs. <code>## Heading</code> · <code>**bold**</code> · <code>*italic*</code> · <code>- list item</code> · <code>&gt; quote</code> · <code>[link text](https://…)</code></p>
+        </div>
+        <label class="check"><input type="checkbox" id="p-draft"> Draft (hidden from your site)</label>
+        <div class="btns"><button class="btn danger" id="p-delete" type="button">Delete post</button></div>
+        <div class="confirm" id="p-confirm" hidden>Delete this post? <button class="btn small danger" id="p-yes" type="button">Yes, delete</button><button class="btn small" id="p-no" type="button">Cancel</button></div>
+      </div>
+    </div>
+
+    <!-- Videos -->
+    <div data-panel="videos" hidden>
+      <div class="card">
+        <h2>Add a video</h2>
+        <label for="v-url">YouTube link<input type="url" id="v-url" placeholder="https://youtu.be/…" autocapitalize="off"></label>
+        <label for="v-title">Title<input type="text" id="v-title"></label>
+        <label for="v-text">Short description <small>Optional</small><input type="text" id="v-text"></label>
+        <div class="btns"><button class="btn primary" id="v-add" type="button">Add video</button></div>
+        <p class="status" id="v-msg" aria-live="polite"></p>
+      </div>
+      <div class="list" id="video-list"></div>
+    </div>
+
+    <!-- Now panel -->
+    <div data-panel="now" hidden>
+      <div class="card">
+        <div class="row">
+          <label for="n-label">Month label<input type="text" id="n-label" placeholder="November 2026"></label>
+          <label class="check" style="align-self:end;padding-bottom:.6rem"><input type="checkbox" id="n-open"> Show “Open to work”</label>
+        </div>
+        <div id="now-items" style="display:grid;gap:.75rem"></div>
+        <div class="btns"><button class="btn" id="n-add" type="button">+ Add line</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="publish" id="publish" hidden><div class="wrap">
+  <span class="status" id="pub-msg" aria-live="polite">No changes yet.</span>
+  <button class="btn primary" id="pub-btn" type="button" disabled>Publish</button>
+</div></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var KEY="sm-admin";
+  var cfg={}, data=null, sha=null, dirty=false, editing=-1;
+
+  function store(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}}
+
+  function b64dec(s){var bin=atob(s.replace(/\s/g,""));var u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);}
+  function b64enc(str){var u=new TextEncoder().encode(str),bin="";for(var i=0;i<u.length;i+=0x8000)bin+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(bin);}
+  function api(method,body){
+    return fetch("https://api.github.com/repos/"+encodeURIComponent(cfg.owner)+"/"+encodeURIComponent(cfg.repo)+"/contents/content.json",{
+      method:method,headers:{"Authorization":"Bearer "+cfg.token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},
+      body:body?JSON.stringify(body):undefined,cache:"no-store"});
+  }
+  function explain(r){
+    if(r.status===401) return "GitHub didn’t accept the token. Check it was copied fully and hasn’t expired.";
+    if(r.status===403) return "The token can’t write here. Give it Contents: Read and write on this repository.";
+    if(r.status===404) return "Couldn’t find content.json. Check the username and repository, and that content.json is uploaded.";
+    if(r.status===409) return "The site changed on GitHub since you opened this page. Reload the page and make your change again.";
+    return "GitHub returned an error ("+r.status+"). Try again in a moment.";
+  }
+
+  /* ---------- Connect ---------- */
+  function connect(){
+    var msg=$("connect-msg");
+    cfg={owner:$("owner").value.trim(),repo:$("repo").value.trim(),token:$("token").value.trim()};
+    if(!cfg.owner||!cfg.repo||!cfg.token){msg.className="status bad";msg.textContent="Fill in all three fields.";return;}
+    msg.className="status";msg.textContent="Connecting…";
+    api("GET").then(function(r){
+      if(!r.ok){msg.className="status bad";msg.textContent=explain(r);throw 0;}
+      return r.json();
+    }).then(function(j){
+      sha=j.sha; data=JSON.parse(b64dec(j.content));
+      data.posts=data.posts||[];data.videos=data.videos||[];data.now=data.now||{items:[]};data.now.items=data.now.items||[];
+      store(cfg);
+      $("connect").hidden=true;$("editor").hidden=false;$("publish").hidden=false;$("signout").hidden=false;
+      showTab("posts");renderAll();setDirty(false);
+    }).catch(function(e){if(e!==0){msg.className="status bad";msg.textContent="Couldn’t reach GitHub. Check your internet connection.";}});
+  }
+  $("connect-btn").onclick=connect;
+  $("signout").onclick=function(){try{localStorage.removeItem(KEY)}catch(e){};location.reload();};
+  var saved=load(); if(saved.owner)$("owner").value=saved.owner; if(saved.repo)$("repo").value=saved.repo;
+  if(saved.token){$("token").value=saved.token;connect();}
+
+  /* ---------- Tabs ---------- */
+  function showTab(t){
+    document.querySelectorAll(".tab").forEach(function(b){b.setAttribute("aria-selected",b.dataset.tab===(t==="post-edit"?"posts":t)?"true":"false")});
+    document.querySelectorAll("[data-panel]").forEach(function(p){p.hidden=p.dataset.panel!==t});
+  }
+  document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){if(editing>-1)saveForm();editing=-1;showTab(b.dataset.tab);renderAll();}});
+
+  function setDirty(d){dirty=d;$("pub-btn").disabled=!d;var m=$("pub-msg");m.className="status"+(d?" warn":"");m.textContent=d?"Unpublished changes":"Everything is published.";}
+  function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function slugify(t){return String(t).toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g,"").trim().replace(/[\s_]+/g,"-").replace(/-+/g,"-").slice(0,60)||"post";}
+  var RESERVED=["home","about","ventures","work","carewell","blog","videos","contact","settings","sidebar","customize","upgrade","downloads"];
+
+  /* ---------- Posts ---------- */
+  function renderPosts(){
+    var L=$("post-list");
+    var order=data.posts.map(function(p,i){return i}).sort(function(a,b){return (data.posts[b].date||"").localeCompare(data.posts[a].date||"")});
+    if(!order.length){L.innerHTML='<div class="empty">No posts yet. Tap “New post” to write your first one.</div>';return;}
+    L.innerHTML=order.map(function(i){var p=data.posts[i];return '<div class="item"><div><b>'+esc(p.title||"Untitled")+(p.draft?'<span class="pill draft">Draft</span>':'<span class="pill live">Live</span>')+'</b><small>'+esc(p.date||"")+'</small></div><button class="btn small" data-edit="'+i+'" type="button">Edit</button></div>';}).join("");
+    L.querySelectorAll("[data-edit]").forEach(function(b){b.onclick=function(){openPost(+b.dataset.edit)}});
+  }
+  var slugTouched=false;
+  function openPost(i){
+    editing=i;var p=data.posts[i];
+    $("p-title").value=p.title||"";$("p-summary").value=p.summary||"";$("p-date").value=p.date||"";$("p-slug").value=p.slug||"";
+    $("p-body").value=p.body||"";$("p-draft").checked=!!p.draft;slugTouched=!!p.slug;
+    $("p-confirm").hidden=true;mode(false);showTab("post-edit");window.scrollTo(0,0);
+  }
+  function saveForm(){
+    if(editing<0)return;var p=data.posts[editing];
+    var slug=slugify($("p-slug").value||$("p-title").value);
+    if(RESERVED.indexOf(slug)>-1)slug+="-post";
+    var clash=data.posts.some(function(q,j){return j!==editing&&q.slug===slug}); if(clash)slug+="-"+(editing+1);
+    p.title=$("p-title").value.trim();p.summary=$("p-summary").value.trim();p.date=$("p-date").value;p.slug=slug;p.body=$("p-body").value;p.draft=$("p-draft").checked;
+  }
+  ["p-title","p-summary","p-date","p-slug","p-body","p-draft"].forEach(function(id){$(id).addEventListener("input",function(){
+    if(id==="p-slug")slugTouched=true;
+    if(id==="p-title"&&!slugTouched)$("p-slug").value=slugify($("p-title").value);
+    setDirty(true);
+  });});
+  $("p-draft").addEventListener("change",function(){setDirty(true)});
+  $("new-post").onclick=function(){
+    data.posts.push({slug:"",title:"",date:new Date().toISOString().slice(0,10),summary:"",body:"",draft:true});
+    openPost(data.posts.length-1);slugTouched=false;setDirty(true);$("p-title").focus();
+  };
+  $("back-posts").onclick=function(){saveForm();editing=-1;showTab("posts");renderPosts();};
+  $("p-delete").onclick=function(){$("p-confirm").hidden=false;};
+  $("p-no").onclick=function(){$("p-confirm").hidden=true;};
+  $("p-yes").onclick=function(){data.posts.splice(editing,1);editing=-1;setDirty(true);showTab("posts");renderPosts();};
+
+  function inline(t){t=esc(t);t=t.replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");return t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,function(m,a,u){return /^(https?:|mailto:|#)/i.test(u)?'<a href="'+u+'" target="_blank" rel="noopener">'+a+'</a>':a;});}
+  function md(src){return String(src||"").replace(/\r/g,"").split(/\n\s*\n/).map(function(b){b=b.trim();if(!b)return "";var L=b.split("\n");
+    if(L.every(function(l){return /^\s*[-*] /.test(l)}))return "<ul>"+L.map(function(l){return "<li>"+inline(l.replace(/^\s*[-*] /,""))+"</li>"}).join("")+"</ul>";
+    if(L.every(function(l){return /^\s*\d+\. /.test(l)}))return "<ol>"+L.map(function(l){return "<li>"+inline(l.replace(/^\s*\d+\. /,""))+"</li>"}).join("")+"</ol>";
+    if(/^#{1,3} /.test(b))return "<h2>"+inline(b.replace(/^#{1,3} /,""))+"</h2>";
+    if(L.every(function(l){return /^> ?/.test(l)}))return "<blockquote>"+inline(L.map(function(l){return l.replace(/^> ?/,"")}).join(" "))+"</blockquote>";
+    return "<p>"+L.map(inline).join("<br>")+"</p>";}).join("");}
+  function mode(prev){$("p-body").hidden=prev;$("p-preview").hidden=!prev;if(prev)$("p-preview").innerHTML=md($("p-body").value)||'<p style="color:var(--muted)">Nothing to preview yet.</p>';
+    $("b-write").classList.toggle("primary",!prev);$("b-preview").classList.toggle("primary",prev);}
+  $("b-write").onclick=function(){mode(false)};$("b-preview").onclick=function(){mode(true)};
+
+  /* ---------- Videos ---------- */
+  function ytId(u){var m=String(u||"").match(/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([A-Za-z0-9_-]{11})/);return m?m[1]:null;}
+  function renderVideos(){
+    var L=$("video-list");
+    if(!data.videos.length){L.innerHTML='<div class="empty">No videos yet.</div>';return;}
+    L.innerHTML=data.videos.map(function(v,i){return '<div class="item"><div><b>'+esc(v.title)+'</b><small>'+esc(v.url)+'</small></div><div class="btns">'+(i>0?'<button class="btn small" data-up="'+i+'" type="button" aria-label="Move up">↑</button>':'')+'<button class="btn small danger" data-del="'+i+'" type="button">Remove</button></div></div>';}).join("");
+    L.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){data.videos.splice(+b.dataset.del,1);setDirty(true);renderVideos();}});
+    L.querySelectorAll("[data-up]").forEach(function(b){b.onclick=function(){var i=+b.dataset.up,t=data.videos[i];data.videos[i]=data.videos[i-1];data.videos[i-1]=t;setDirty(true);renderVideos();}});
+  }
+  $("v-add").onclick=function(){
+    var u=$("v-url").value.trim(),t=$("v-title").value.trim(),m=$("v-msg");
+    if(!ytId(u)){m.className="status bad";m.textContent="Paste a full YouTube video link, for example https://youtu.be/abc123XYZ00.";return;}
+    if(!t){m.className="status bad";m.textContent="Add a title for the video.";return;}
+    data.videos.unshift({url:u,title:t,text:$("v-text").value.trim()});
+    $("v-url").value="";$("v-title").value="";$("v-text").value="";m.className="status ok";m.textContent="Added. Tap Publish to put it on your site.";
+    setDirty(true);renderVideos();
+  };
+
+  /* ---------- Now panel ---------- */
+  function renderNow(){
+    $("n-label").value=data.now.label||"";$("n-open").checked=!!data.now.openToWork;
+    $("now-items").innerHTML=data.now.items.map(function(it,i){return '<div class="nowitem"><div class="row"><label>Headline<input type="text" data-k="title" data-i="'+i+'" value="'+esc(it.title)+'"></label><label>Colour<select data-k="status" data-i="'+i+'"><option value="ok"'+(it.status==="ok"?" selected":"")+'>Green (active)</option><option value="warn"'+(it.status==="warn"?" selected":"")+'>Amber (in progress)</option><option value="blue"'+(it.status!=="ok"&&it.status!=="warn"?" selected":"")+'>Blue</option></select></label></div><label>Detail<input type="text" data-k="text" data-i="'+i+'" value="'+esc(it.text)+'"></label><div class="btns"><button class="btn small danger" data-rm="'+i+'" type="button">Remove line</button></div></div>';}).join("");
+    $("now-items").querySelectorAll("[data-k]").forEach(function(el){el.addEventListener("input",function(){data.now.items[+el.dataset.i][el.dataset.k]=el.value;setDirty(true);});el.addEventListener("change",function(){data.now.items[+el.dataset.i][el.dataset.k]=el.value;setDirty(true);});});
+    $("now-items").querySelectorAll("[data-rm]").forEach(function(b){b.onclick=function(){data.now.items.splice(+b.dataset.rm,1);setDirty(true);renderNow();}});
+  }
+  $("n-label").addEventListener("input",function(){data.now.label=this.value;setDirty(true)});
+  $("n-open").addEventListener("change",function(){data.now.openToWork=this.checked;setDirty(true)});
+  $("n-add").onclick=function(){data.now.items.push({title:"",text:"",status:"blue"});setDirty(true);renderNow();};
+
+  function renderAll(){renderPosts();renderVideos();renderNow();}
+
+  /* ---------- Publish ---------- */
+  $("pub-btn").onclick=function(){
+    saveForm();
+    var bad=data.posts.find(function(p){return !p.draft&&!p.title});
+    var m=$("pub-msg");
+    if(bad){m.className="status bad";m.textContent="A live post has no title. Add one or mark it as a draft.";return;}
+    $("pub-btn").disabled=true;m.className="status";m.textContent="Publishing…";
+    api("PUT",{message:"Update site content from admin",content:b64enc(JSON.stringify(data,null,2)+"\n"),sha:sha}).then(function(r){
+      if(!r.ok){m.className="status bad";m.textContent=explain(r);$("pub-btn").disabled=false;throw 0;}
+      return r.json();
+    }).then(function(j){
+      sha=j.content.sha;dirty=false;m.className="status ok";m.textContent="Published. Live on your site in 1–2 minutes.";
+      if(editing<0)renderAll();
+    }).catch(function(e){if(e!==0){m.className="status bad";m.textContent="Couldn’t reach GitHub. Check your connection and tap Publish again.";$("pub-btn").disabled=false;}});
+  };
+  addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
+})();
+</script>
+</body>
+</html>

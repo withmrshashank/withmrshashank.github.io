@@ -1,0 +1,42 @@
+{
+  "now": {
+    "label": "November 2026",
+    "openToWork": true,
+    "items": [
+      {
+        "title": "Growing AUR Studio",
+        "text": "Social, ads and community for medical and Web3 brands.",
+        "status": "ok"
+      },
+      {
+        "title": "Building a scheduling tool",
+        "text": "Our own post scheduler, starting with Instagram, LinkedIn and X.",
+        "status": "warn"
+      },
+      {
+        "title": "Writing and filming",
+        "text": "Notes from the work on the blog. Videos coming soon.",
+        "status": "blue"
+      }
+    ]
+  },
+  "videos": [],
+  "posts": [
+    {
+      "slug": "why-own-scheduler",
+      "title": "Why I’m building our own scheduling tool",
+      "date": "2026-11-16",
+      "draft": true,
+      "summary": "Buffer works well for us today. Here’s why AUR Ventures is building its own anyway.",
+      "body": "Right now AUR Studio schedules posts with Buffer, and it does the job. So why build our own?\n\n## Subscriptions grow with you\n\nEvery new client means more accounts, more seats and a bigger monthly bill. For a young studio, that cost climbs faster than revenue. Owning the tool turns an ever-growing subscription into something we control.\n\n## Built around how we work\n\nOff-the-shelf tools are made for everyone. Ours can be shaped around the way the studio plans, approves and publishes content, without paying for features we never use.\n\n## Starting small\n\nThe first version focuses on three platforms:\n\n- Instagram\n- LinkedIn\n- X\n\nIt’s designed for mobile first, because that’s where most of my day-to-day social work happens.\n\n## What comes next\n\nWe’ll use it daily inside the studio, fix what’s missing, then apply for official platform API approval. If it works as well as I hope, we may open it up to other teams too. I’ll share progress here as it happens."
+    },
+    {
+      "slug": "community-looked-after",
+      "title": "What makes a community feel looked after",
+      "date": "2026-11-15",
+      "draft": true,
+      "summary": "Lessons from growing communities across several platforms: voice, speed and closing the loop.",
+      "body": "Followers watch. Community members talk back, to the brand and to each other. Getting from one to the other comes down to a few habits.\n\n## One voice, everywhere\n\nMembers notice when replies sound like different people. A consistent brand voice across platforms tells people someone is paying attention.\n\n## Speed matters\n\nA quick, thoughtful reply does more for trust than a perfect one a day later. Improving response times was one of the biggest drivers of engagement in my work at Bitgoro Media.\n\n## Close the loop\n\nWhen members share feedback, pass it to the team and tell members what changed. People keep contributing when they can see their ideas go somewhere.\n\n## Set guardrails early\n\nClear guidelines and a plan for difficult questions protect the community. In healthcare, that means routing clinical questions to qualified staff, never answering them in a comment thread.\n\nNone of this is complicated. It just has to happen every day."
+    }
+  ]
+}
